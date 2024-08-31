@@ -12,10 +12,21 @@ export default function Home() {
   const numberParentRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (e: any) => {
-    setPoints(parseInt(e.target.value));
+    let newPoints = 0;
+    if (e.target.value != '') newPoints = parseInt(e.target.value);
+    setPoints(newPoints);
   };
 
   const handlePlayClick = () => {
+    if (points <= 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Input',
+        text: 'Please enter a valid number of points before starting the game.',
+      });
+      return;
+    }
+
     setIsPlaying(false);
     setNumbers([]);
     setPositions([]);
@@ -73,6 +84,14 @@ export default function Home() {
   }, [isPlaying]);
 
   const handleNumberClick = (e: any, number: number) => {
+    if (!isPlaying) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Play again!',
+        text: 'Press play to play again.',
+      });
+      return;
+    }
     if (number < nextNumber) return;
     if (number > nextNumber) {
       Swal.fire({
@@ -128,7 +147,13 @@ export default function Home() {
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="text-red-500 mt-3 text-[18px] font-bold border-[2px] border-red-500 rounded-full w-[120px] h-[50px] hover:bg-red-500 hover:text-white" onClick={handlePlayClick}>
+          <button
+            className={`text-red-500 mt-3 text-[18px] font-bold border-[2px] border-red-500 rounded-full w-[120px] h-[50px] transition-colors duration-200 ${
+              points < 0 ? 'bg-gray-300 cursor-not-allowed' : 'hover:bg-red-500 hover:text-white'
+            }`}
+            onClick={handlePlayClick}
+            disabled={points < 0}
+          >
             {isPlaying ? 'Reset' : 'Play'}
           </button>
         </div>
