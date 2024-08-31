@@ -78,7 +78,7 @@ export default function Home() {
       Swal.fire({
         icon: 'error',
         title: 'You lose!',
-        text: 'Press play to try again.',
+        text: 'You need to sort in ascending order. Press the play button to try again.',
       });
       setIsPlaying(false);
       return;
@@ -98,7 +98,7 @@ export default function Home() {
       Swal.fire({
         icon: 'success',
         title: 'Congratulations!',
-        text: 'You win!',
+        text: `You win the game in ${time} seconds!`,
       });
       setIsPlaying(false);
       return;
@@ -109,30 +109,30 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24n bg-white">
-      <div className="w-[95%] mt-4 rounded-sm border-[3px] border-black h-full">
-        <h2 className="text-center mt-5 text-[24px] font-bold">HABAZO - Entrance test - Trần Tiến Thế - React JS</h2>
-        <div className="flex justify-between ml-[250px] mr-[250px]">
+      <div className="w-[95%] mt-4 rounded-sm border-[4px] border-black h-full ">
+        <h2 className="text-center mt-5 text-[18px] md:text-[24px] font-bold text-red-500">HABAZO - Entrance Test - Trần Tiến Thế - React JS</h2>
+        <div className="flex justify-between ml-[20px] mr-[20px] md:ml-[250px] md:mr-[250px]">
           <div className="flex">
-            <h2 className="mt-5 text-[18px] font-bold">Points :</h2>
+            <h2 className="mt-5 text-[18px] font-bold text-red-500">Points :</h2>
             <input
               type="number"
-              className="border-[2px] border-black ml-5 mt-5 font-bold w-[100px] text-center"
+              className="border-[2px] border-red-500 ml-5 mt-5 font-bold w-[100px] text-center "
               value={points === 0 ? '' : points}
               onChange={handleInputChange}
               // disabled={isPlaying}
             />
           </div>
-          <div className="flex">
+          <div className="flex text-red-500">
             <h2 className="mt-5 text-[18px] font-bold">Time :</h2>
-            <h2 className="mt-5 text-[18px] font-bold ml-5">{time}s</h2> {/* Display timer */}
+            <h2 className="mt-5 text-[18px] font-bold ml-5">{time} s</h2>
           </div>
         </div>
         <div className="flex justify-center">
-          <button className="mt-3 text-[18px] font-bold border-[2px] border-red-500 rounded-full w-[120px] h-[50px] hover:bg-red-500 hover:text-white" onClick={handlePlayClick}>
+          <button className="text-red-500 mt-3 text-[18px] font-bold border-[2px] border-red-500 rounded-full w-[120px] h-[50px] hover:bg-red-500 hover:text-white" onClick={handlePlayClick}>
             {isPlaying ? 'Reset' : 'Play'}
           </button>
         </div>
-        <div ref={numberParentRef} className="w-[98%] ml-4 mt-4 rounded-sm border-[3px] border-black h-[500px] mb-5 relative">
+        <div ref={numberParentRef} className="md:w-[98%] md:ml-4 mt-4 rounded-sm border-[2px] border-black h-[500px] mb-5 relative bg-slate-200">
           {numbers.map((number, index) => (
             <span
               key={number}
