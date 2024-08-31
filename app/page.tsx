@@ -5,11 +5,11 @@ import Swal from 'sweetalert2';
 export default function Home() {
   const [points, setPoints] = useState(0);
   const [numbers, setNumbers] = useState([]);
-  const [positions, setPositions] = useState([]);
+  const [positions, setPositions] = useState<any>([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [time, setTime] = useState(0);
   const [nextNumber, setNextNumber] = useState(1);
-  const numberParentRef = useRef(null);
+  const numberParentRef = useRef<HTMLDivElement>(null);
 
   const handleInputChange = (e: any) => {
     setPoints(parseInt(e.target.value));
